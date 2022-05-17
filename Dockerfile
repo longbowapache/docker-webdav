@@ -22,5 +22,7 @@ RUN rm /etc/nginx/sites-enabled/*
 
 COPY entrypoint.sh /
 RUN chmod +x entrypoint.sh
+RUN ln -sf /dev/stdout /var/log/nginx/webdav_access.log \
+    && ln -sf /dev/stderr /var/log/nginx/webdav_error.log
 
 CMD /entrypoint.sh && nginx -g "daemon off;"
